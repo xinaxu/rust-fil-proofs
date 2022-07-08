@@ -14,4 +14,9 @@ members = [
 ]
 
 [patch.crates-io]
-neptune = { git = "https://github.com/filecoin-project/neptune" }
+ec-gpu = { git = "https://github.com/filecoin-project/ec-gpu", branch = "fft-no-gpuengine" }
+ec-gpu-gen = { git = "https://github.com/filecoin-project/ec-gpu", branch = "fft-no-gpuengine" }
+blstrs = { git = "https://github.com/filecoin-project/blstrs", branch = "ec-gpu-impl" }
+bellperson = { git = "https://github.com/filecoin-project/bellperson", branch = "fft-no-gpuengine" }
+pasta_curves = { git = "https://github.com/filecoin-project/pasta_curves", branch = "ec-gpu-020" }
+neptune = { git = "https://github.com/filecoin-project/neptune", branch = "fft-no-gpuengine" }
