@@ -278,6 +278,9 @@ jobs:
     resource_class: large
     environment: *setup-env
     steps:
+      - run:
+          name: Delete simulators for more free disk space
+          command: sudo rm -rf /Library/Developer/CoreSimulator/Profiles/Runtimes/
       - checkout
       - run:
           name: Install hwloc with Homebrew
