@@ -317,14 +317,14 @@ commands:
             || (cargo build --release --bin paramcache && find . -type f -name paramcache | xargs -I {} mv {} /tmp/paramcache.awesome)
       - run:
           name: Obtain filecoin groth parameters
-          command: /tmp/paramcache.awesome --sector-sizes='16384'
+          command: /tmp/paramcache.awesome --sector-sizes='2048,4096,16384,32768'
           no_output_timeout: 60m
       - run:
           name: get checksums of parameters
           command: shasum /tmp/filecoin-proof-parameters/*
       - run:
           name: try to generate them again
-          command: /tmp/paramcache.awesome --sector-sizes='16384'
+          command: /tmp/paramcache.awesome --sector-sizes='2048,4096,16384,32768'
           no_output_timeout: 60m
       - run:
           name: get checksums of parameters again
@@ -364,7 +364,7 @@ commands:
       - run: uname > os.txt
       - save_cache:
           name: "Save parameter cache"
-          key: proof-params-v28-k-vmx2-{{ checksum "os.txt" }}-{{ checksum "filecoin-proofs/parameters.json" }}
+          key: proof-params-v28-k-vmx3-{{ checksum "os.txt" }}-{{ checksum "filecoin-proofs/parameters.json" }}
           paths:
             - "/tmp/paramcache.awesome"
             - "/tmp/filecoin-proof-parameters/"
@@ -374,7 +374,7 @@ commands:
       - run: uname > os.txt
       - restore_cache:
           name: "Restore parameter cache"
-          key: proof-params-v28-k-vmx2-{{ checksum "os.txt" }}-{{ checksum "filecoin-proofs/parameters.json" }}
+          key: proof-params-v28-k-vmx3-{{ checksum "os.txt" }}-{{ checksum "filecoin-proofs/parameters.json" }}
 
 workflows:
   version: 2.1
