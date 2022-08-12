@@ -316,6 +316,9 @@ commands:
             set -x; test -f /tmp/paramcache.awesome \
             || (cargo build --release --bin paramcache && find . -type f -name paramcache | xargs -I {} mv {} /tmp/paramcache.awesome)
       - run:
+          name: get checksums of parameters (might be empty)
+          command: shasum /tmp/filecoin-proof-parameters/*
+      - run:
           name: Obtain filecoin groth parameters
           command: /tmp/paramcache.awesome --sector-sizes='2048,4096,16384,32768'
           no_output_timeout: 60m
