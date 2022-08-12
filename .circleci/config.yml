@@ -321,7 +321,14 @@ commands:
           no_output_timeout: 60m
       - run:
           name: get checksums of parameters
-          command: shasum /tmp/filecoin-proof-parameters
+          command: shasum /tmp/filecoin-proof-parameters/*
+      - run:
+          name: try to generate them again
+          command: /tmp/paramcache.awesome --sector-sizes='16384'
+          no_output_timeout: 60m
+      - run:
+          name: get checksums of parameters again
+          command: shasum /tmp/filecoin-proof-parameters/*
       - run:
           name: Obtain filecoin ipp parameter file
           command: |
