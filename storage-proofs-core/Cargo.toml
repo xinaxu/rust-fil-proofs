@@ -27,7 +27,7 @@ rayon = "1.0.0"
 serde = { version = "1.0", features = ["derive"]}
 blake2b_simd = "1.0.0"
 ff = "0.12.0"
-bellperson = "0.22.0"
+bellperson = "0.23.0"
 serde_json = "1.0"
 log = "0.4.7"
 rand_chacha = "0.3"
@@ -39,13 +39,14 @@ gperftools = { version = "0.2", optional = true }
 num_cpus = "1.10.1"
 semver = "1.0.6"
 fr32 = { path = "../fr32", version = "~5.0.0"}
+blstrs = "0.6.1"
 cbc = { version = "0.1.2", features = ["std"] }
-blstrs = "0.5.0"
 halo2_proofs = "0.2.0"
 fil-halo2-gadgets = { path = "../fil-halo2-gadgets" }
-ec-gpu = "0.1.0"
+ec-gpu = "0.2.0"
 typemap = "0.3.3"
-neptune = { git = "https://github.com/filecoin-project/neptune", branch = "fr-as-trait-halo2-circuit" }
+#neptune = { git = "https://github.com/filecoin-project/neptune", branch = "fr-as-trait-halo2-circuit" }
+neptune = { version = "~7.2.0", features = ["bls", "pasta", "arity2", "arity4", "arity8", "arity11", "arity16", "arity24", "arity36"] }
 
 [dev-dependencies]
 proptest = "1.0.0"
@@ -56,6 +57,7 @@ sha2raw = { path = "../sha2raw", version = "~7.0.0"}
 filecoin-hashers = { path = "../filecoin-hashers", version = "~7.0.0", default-features = false, features = ["blake2s", "sha256", "poseidon"] }
 tempfile = "3"
 blake2s_simd = "1.0.0"
+fil_logger = "0.1.6"
 
 [features]
 default = ["opencl"]
@@ -65,8 +67,8 @@ big-sector-sizes-bench = []
 measurements = ["cpu-time", "gperftools"]
 profile = ["measurements"]
 
-cuda = ["bellperson/cuda", "filecoin-hashers/cuda"]
-opencl = ["bellperson/opencl", "filecoin-hashers/opencl"]
+cuda = ["bellperson/cuda", "filecoin-hashers/cuda", "halo2_proofs/cuda"]
+opencl = ["bellperson/opencl", "filecoin-hashers/opencl", "halo2_proofs/opencl"]
 
 [[bench]]
 name = "sha256"
