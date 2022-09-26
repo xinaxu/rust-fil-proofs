@@ -10,6 +10,8 @@ use storage_proofs_porep::stacked::{
     StackedBucketGraph,
 };
 
+const NUM_ITERATIONS: usize = 1024 * 1024 * 10;
+
 struct Pregenerated<H: 'static + Hasher> {
     data: Vec<u8>,
     replica_id: H::Domain,
@@ -57,15 +59,11 @@ fn kdf_benchmark(c: &mut Criterion) {
         let graph = &graph;
 
         b.iter(|| {
-            black_box(create_label_exp(
-                graph,
-                None,
-                &replica_id,
-                &*exp_data,
-                data,
-                1,
-                2,
-            ))
+            for _ in 0..NUM_ITERATIONS {
+                black_box(
+                    create_label_exp(graph, None, &replica_id, &*exp_data, data, 1, 2).unwrap(),
+                )
+            }
         })
     });
 
@@ -73,7 +71,11 @@ fn kdf_benchmark(c: &mut Criterion) {
         let mut data = data.clone();
         let graph = &graph;
 
-        b.iter(|| black_box(create_label(graph, None, &replica_id, &mut data, 1, 2)))
+        b.iter(|| {
+            for _ in 0..NUM_ITERATIONS {
+                black_box(create_label(graph, None, &replica_id, &mut data, 1, 2).unwrap())
+            }
+        })
     });
 
     group.finish();
