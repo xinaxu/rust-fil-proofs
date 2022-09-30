@@ -1718,7 +1718,7 @@ dependencies = [
 [[package]]
 name = "halo2_proofs"
 version = "0.2.0"
-source = "git+https://github.com/filecoin-project/halo2?branch=gpu#32d24a860b316d52322152d2d8f15d198578568a"
+source = "git+https://github.com/filecoin-project/halo2?branch=gpu#1a4431451de1766a6cd8089e59ca8ed4af340cf2"
 dependencies = [
  "blake2b_simd",
  "ec-gpu",
@@ -1726,6 +1726,7 @@ dependencies = [
  "ff",
  "group",
  "log",
+ "pasta-msm",
  "pasta_curves",
  "rand_core",
  "rayon",
@@ -2560,6 +2561,19 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "427c3892f9e783d91cc128285287e70a59e206ca452770ece88a76f7a3eddd72"
 
 [[package]]
+name = "pasta-msm"
+version = "0.1.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a40dc8bdddb15a18fdf7c398f341a5ef2632a287419bbeeb64c61dec25091627"
+dependencies = [
+ "cc",
+ "pasta_curves",
+ "semolina",
+ "sppark",
+ "which",
+]
+
+[[package]]
 name = "pasta_curves"
 version = "0.4.0"
 source = "git+https://github.com/filecoin-project/pasta_curves?branch=halo2-gpu#ed9ff0e32dcc2721d672fb6f750b863c24726135"
@@ -3072,6 +3086,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "semolina"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e90759f733a01b95d6ba70180b954d1d96e3e7e11f86c3fb0da0231300972e05"
+dependencies = [
+ "cc",
+ "glob",
+]
+
+[[package]]
 name = "semver"
 version = "1.0.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3249,6 +3273,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7f6002a767bff9e83f8eeecf883ecb8011875a21ae8da43bffb817a57e78cc09"
 dependencies = [
  "lock_api",
+]
+
+[[package]]
+name = "sppark"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "202bc058424c1a3c39b5422f84715a816a93ae2cd1d1020e83fda2f38fe788d2"
+dependencies = [
+ "cc",
+ "which",
 ]
 
 [[package]]

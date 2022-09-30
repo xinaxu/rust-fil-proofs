@@ -69,6 +69,7 @@ profile = ["measurements"]
 
 cuda = ["bellperson/cuda", "filecoin-hashers/cuda", "halo2_proofs/cuda"]
 opencl = ["bellperson/opencl", "filecoin-hashers/opencl", "halo2_proofs/opencl"]
+sppark = ["halo2_proofs/sppark"]
 
 [[bench]]
 name = "sha256"
