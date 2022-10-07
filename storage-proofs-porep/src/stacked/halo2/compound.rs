@@ -111,6 +111,7 @@ macro_rules! impl_compound_proof {
                         .iter()
                         .enumerate()
                         .map(|(k, vanilla_proof)| {
+                            trace!("collect circuit for partition {}/{}", k, partition_count);
                             // The only public input field which should change is `k`.
                             let mut vanilla_pub_inputs = vanilla_pub_inputs.clone();
                             vanilla_pub_inputs.k = Some(k);
@@ -132,7 +133,10 @@ macro_rules! impl_compound_proof {
                         })
                         .collect();
 
-                    create_batch_proof(keypair, &circs, &circ_pub_inputs_vecs, &mut OsRng)
+                    trace!("batch prove partitions:start ({})", partition_count);
+                    let proof = create_batch_proof(keypair, &circs, &circ_pub_inputs_vecs, &mut OsRng);
+                    trace!("batch prove partitions:finish ({})", partition_count);
+                    proof
                 }
 
                 fn verify_partition(

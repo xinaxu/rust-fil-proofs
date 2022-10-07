@@ -793,7 +793,7 @@ where
                     Tree::TopTreeArity,
                 >,
                 DefaultPieceHasher<F>,
-            > as halo2::CompoundProof<F, SECTOR_NODES_2_KIB>>::prove_all_partitions_with_vanilla(
+            > as halo2::CompoundProof<F, SECTOR_NODES_2_KIB>>::batch_prove_all_partitions_with_vanilla(
                 &vanilla_setup_params,
                 &vanilla_pub_inputs,
                 &vanilla_proofs,
@@ -801,10 +801,7 @@ where
             )?;
             trace!("snark_proof:finish");
 
-            circ_partition_proofs
-                .iter()
-                .flat_map(|halo_proof| halo_proof.as_bytes().to_vec())
-                .collect()
+            circ_partition_proofs.as_bytes().to_vec()
         }
         SECTOR_NODES_4_KIB => {
             let circ = SdrPorepCircuit::<
@@ -842,7 +839,7 @@ where
                     Tree::TopTreeArity,
                 >,
                 DefaultPieceHasher<F>,
-            > as halo2::CompoundProof<F, SECTOR_NODES_4_KIB>>::prove_all_partitions_with_vanilla(
+            > as halo2::CompoundProof<F, SECTOR_NODES_4_KIB>>::batch_prove_all_partitions_with_vanilla(
                 &vanilla_setup_params,
                 &vanilla_pub_inputs,
                 &vanilla_proofs,
@@ -850,10 +847,7 @@ where
             )?;
             trace!("snark_proof:finish");
 
-            circ_partition_proofs
-                .iter()
-                .flat_map(|halo_proof| halo_proof.as_bytes().to_vec())
-                .collect()
+            circ_partition_proofs.as_bytes().to_vec()
         }
         SECTOR_NODES_16_KIB => {
             let circ = SdrPorepCircuit::<
@@ -891,7 +885,7 @@ where
                     Tree::TopTreeArity,
                 >,
                 DefaultPieceHasher<F>,
-            > as halo2::CompoundProof<F, SECTOR_NODES_16_KIB>>::prove_all_partitions_with_vanilla(
+            > as halo2::CompoundProof<F, SECTOR_NODES_16_KIB>>::batch_prove_all_partitions_with_vanilla(
                 &vanilla_setup_params,
                 &vanilla_pub_inputs,
                 &vanilla_proofs,
@@ -899,10 +893,7 @@ where
             )?;
             trace!("snark_proof:finish");
 
-            circ_partition_proofs
-                .iter()
-                .flat_map(|halo_proof| halo_proof.as_bytes().to_vec())
-                .collect()
+            circ_partition_proofs.as_bytes().to_vec()
         }
         SECTOR_NODES_32_KIB => {
             let circ = SdrPorepCircuit::<
@@ -940,7 +931,7 @@ where
                     Tree::TopTreeArity,
                 >,
                 DefaultPieceHasher<F>,
-            > as halo2::CompoundProof<F, SECTOR_NODES_32_KIB>>::prove_all_partitions_with_vanilla(
+            > as halo2::CompoundProof<F, SECTOR_NODES_32_KIB>>::batch_prove_all_partitions_with_vanilla(
                 &vanilla_setup_params,
                 &vanilla_pub_inputs,
                 &vanilla_proofs,
@@ -948,10 +939,7 @@ where
             )?;
             trace!("snark_proof:finish");
 
-            circ_partition_proofs
-                .iter()
-                .flat_map(|halo_proof| halo_proof.as_bytes().to_vec())
-                .collect()
+            circ_partition_proofs.as_bytes().to_vec()
         }
         SECTOR_NODES_8_MIB => {
             let circ = SdrPorepCircuit::<
@@ -989,7 +977,7 @@ where
                     Tree::TopTreeArity,
                 >,
                 DefaultPieceHasher<F>,
-            > as halo2::CompoundProof<F, SECTOR_NODES_8_MIB>>::prove_all_partitions_with_vanilla(
+            > as halo2::CompoundProof<F, SECTOR_NODES_8_MIB>>::batch_prove_all_partitions_with_vanilla(
                 &vanilla_setup_params,
                 &vanilla_pub_inputs,
                 &vanilla_proofs,
@@ -997,10 +985,7 @@ where
             )?;
             trace!("snark_proof:finish");
 
-            circ_partition_proofs
-                .iter()
-                .flat_map(|halo_proof| halo_proof.as_bytes().to_vec())
-                .collect()
+            circ_partition_proofs.as_bytes().to_vec()
         }
         SECTOR_NODES_16_MIB => {
             let circ = SdrPorepCircuit::<
@@ -1038,7 +1023,7 @@ where
                     Tree::TopTreeArity,
                 >,
                 DefaultPieceHasher<F>,
-            > as halo2::CompoundProof<F, SECTOR_NODES_16_MIB>>::prove_all_partitions_with_vanilla(
+            > as halo2::CompoundProof<F, SECTOR_NODES_16_MIB>>::batch_prove_all_partitions_with_vanilla(
                 &vanilla_setup_params,
                 &vanilla_pub_inputs,
                 &vanilla_proofs,
@@ -1046,10 +1031,7 @@ where
             )?;
             trace!("snark_proof:finish");
 
-            circ_partition_proofs
-                .iter()
-                .flat_map(|halo_proof| halo_proof.as_bytes().to_vec())
-                .collect()
+            circ_partition_proofs.as_bytes().to_vec()
         }
         SECTOR_NODES_512_MIB => {
             let circ = SdrPorepCircuit::<
@@ -1087,7 +1069,7 @@ where
                     Tree::TopTreeArity,
                 >,
                 DefaultPieceHasher<F>,
-            > as halo2::CompoundProof<F, SECTOR_NODES_512_MIB>>::prove_all_partitions_with_vanilla(
+            > as halo2::CompoundProof<F, SECTOR_NODES_512_MIB>>::batch_prove_all_partitions_with_vanilla(
                 &vanilla_setup_params,
                 &vanilla_pub_inputs,
                 &vanilla_proofs,
@@ -1095,10 +1077,7 @@ where
             )?;
             trace!("snark_proof:finish");
 
-            circ_partition_proofs
-                .iter()
-                .flat_map(|halo_proof| halo_proof.as_bytes().to_vec())
-                .collect()
+            circ_partition_proofs.as_bytes().to_vec()
         }
         SECTOR_NODES_32_GIB => {
             let circ = SdrPorepCircuit::<
@@ -1136,7 +1115,7 @@ where
                     Tree::TopTreeArity,
                 >,
                 DefaultPieceHasher<F>,
-            > as halo2::CompoundProof<F, SECTOR_NODES_32_GIB>>::prove_all_partitions_with_vanilla(
+            > as halo2::CompoundProof<F, SECTOR_NODES_32_GIB>>::batch_prove_all_partitions_with_vanilla(
                 &vanilla_setup_params,
                 &vanilla_pub_inputs,
                 &vanilla_proofs,
@@ -1144,10 +1123,7 @@ where
             )?;
             trace!("snark_proof:finish");
 
-            circ_partition_proofs
-                .iter()
-                .flat_map(|halo_proof| halo_proof.as_bytes().to_vec())
-                .collect()
+            circ_partition_proofs.as_bytes().to_vec()
         }
         SECTOR_NODES_64_GIB => {
             let circ = SdrPorepCircuit::<
@@ -1185,7 +1161,7 @@ where
                     Tree::TopTreeArity,
                 >,
                 DefaultPieceHasher<F>,
-            > as halo2::CompoundProof<F, SECTOR_NODES_64_GIB>>::prove_all_partitions_with_vanilla(
+            > as halo2::CompoundProof<F, SECTOR_NODES_64_GIB>>::batch_prove_all_partitions_with_vanilla(
                 &vanilla_setup_params,
                 &vanilla_pub_inputs,
                 &vanilla_proofs,
@@ -1193,10 +1169,7 @@ where
             )?;
             trace!("snark_proof:finish");
 
-            circ_partition_proofs
-                .iter()
-                .flat_map(|halo_proof| halo_proof.as_bytes().to_vec())
-                .collect()
+            circ_partition_proofs.as_bytes().to_vec()
         }
         _ => unimplemented!(),
     };
@@ -2006,17 +1979,8 @@ where
         seed,
     };
 
-    let proofs_byte_len = proof_bytes.len();
-    assert_eq!(proofs_byte_len % partition_count, 0);
-    let proof_byte_len = proofs_byte_len / partition_count;
-    let proofs_bytes = proof_bytes.chunks(proof_byte_len).map(Vec::<u8>::from);
-
     match sector_nodes {
         SECTOR_NODES_2_KIB => {
-            let circ_partition_proofs: Vec<
-                Halo2Proof<F::Affine, SdrPorepCircuit<F, U, V, W, SECTOR_NODES_2_KIB>>,
-            > = proofs_bytes.map(Into::into).collect();
-
             let circ = SdrPorepCircuit::<F, U, V, W, SECTOR_NODES_2_KIB>::blank_circuit();
 
             let keypair = <StackedDrg<
@@ -2036,18 +2000,14 @@ where
                 '_,
                 MerkleTreeWrapper<DefaultTreeHasher<F>, MockStore, U, V, W>,
                 DefaultPieceHasher<F>,
-            > as halo2::CompoundProof<F, SECTOR_NODES_2_KIB>>::verify_all_partitions(
+            > as halo2::CompoundProof<F, SECTOR_NODES_2_KIB>>::batch_verify_all_partitions(
                 &vanilla_setup_params,
                 &vanilla_pub_inputs,
-                &circ_partition_proofs,
+                &proof_bytes.to_vec().into(),
                 &keypair,
-            )?;
+            );
         }
         SECTOR_NODES_4_KIB => {
-            let circ_partition_proofs: Vec<
-                Halo2Proof<F::Affine, SdrPorepCircuit<F, U, V, W, SECTOR_NODES_4_KIB>>,
-            > = proofs_bytes.map(Into::into).collect();
-
             let circ = SdrPorepCircuit::<F, U, V, W, SECTOR_NODES_4_KIB>::blank_circuit();
 
             let keypair = <StackedDrg<
@@ -2067,18 +2027,14 @@ where
                 '_,
                 MerkleTreeWrapper<DefaultTreeHasher<F>, MockStore, U, V, W>,
                 DefaultPieceHasher<F>,
-            > as halo2::CompoundProof<F, SECTOR_NODES_4_KIB>>::verify_all_partitions(
+            > as halo2::CompoundProof<F, SECTOR_NODES_4_KIB>>::batch_verify_all_partitions(
                 &vanilla_setup_params,
                 &vanilla_pub_inputs,
-                &circ_partition_proofs,
+                &proof_bytes.to_vec().into(),
                 &keypair,
-            )?;
+            );
         }
         SECTOR_NODES_16_KIB => {
-            let circ_partition_proofs: Vec<
-                Halo2Proof<F::Affine, SdrPorepCircuit<F, U, V, W, SECTOR_NODES_16_KIB>>,
-            > = proofs_bytes.map(Into::into).collect();
-
             let circ = SdrPorepCircuit::<F, U, V, W, SECTOR_NODES_16_KIB>::blank_circuit();
 
             let keypair = <StackedDrg<
@@ -2098,18 +2054,14 @@ where
                 '_,
                 MerkleTreeWrapper<DefaultTreeHasher<F>, MockStore, U, V, W>,
                 DefaultPieceHasher<F>,
-            > as halo2::CompoundProof<F, SECTOR_NODES_16_KIB>>::verify_all_partitions(
+            > as halo2::CompoundProof<F, SECTOR_NODES_16_KIB>>::batch_verify_all_partitions(
                 &vanilla_setup_params,
                 &vanilla_pub_inputs,
-                &circ_partition_proofs,
+                &proof_bytes.to_vec().into(),
                 &keypair,
-            )?;
+            );
         }
         SECTOR_NODES_32_KIB => {
-            let circ_partition_proofs: Vec<
-                Halo2Proof<F::Affine, SdrPorepCircuit<F, U, V, W, SECTOR_NODES_32_KIB>>,
-            > = proofs_bytes.map(Into::into).collect();
-
             let circ = SdrPorepCircuit::<F, U, V, W, SECTOR_NODES_32_KIB>::blank_circuit();
 
             let keypair = <StackedDrg<
@@ -2129,18 +2081,14 @@ where
                 '_,
                 MerkleTreeWrapper<DefaultTreeHasher<F>, MockStore, U, V, W>,
                 DefaultPieceHasher<F>,
-            > as halo2::CompoundProof<F, SECTOR_NODES_32_KIB>>::verify_all_partitions(
+            > as halo2::CompoundProof<F, SECTOR_NODES_32_KIB>>::batch_verify_all_partitions(
                 &vanilla_setup_params,
                 &vanilla_pub_inputs,
-                &circ_partition_proofs,
+                &proof_bytes.to_vec().into(),
                 &keypair,
-            )?;
+            );
         }
         SECTOR_NODES_8_MIB => {
-            let circ_partition_proofs: Vec<
-                Halo2Proof<F::Affine, SdrPorepCircuit<F, U, V, W, SECTOR_NODES_8_MIB>>,
-            > = proofs_bytes.map(Into::into).collect();
-
             let circ = SdrPorepCircuit::<F, U, V, W, SECTOR_NODES_8_MIB>::blank_circuit();
 
             let keypair = <StackedDrg<
@@ -2160,18 +2108,14 @@ where
                 '_,
                 MerkleTreeWrapper<DefaultTreeHasher<F>, MockStore, U, V, W>,
                 DefaultPieceHasher<F>,
-            > as halo2::CompoundProof<F, SECTOR_NODES_8_MIB>>::verify_all_partitions(
+            > as halo2::CompoundProof<F, SECTOR_NODES_8_MIB>>::batch_verify_all_partitions(
                 &vanilla_setup_params,
                 &vanilla_pub_inputs,
-                &circ_partition_proofs,
+                &proof_bytes.to_vec().into(),
                 &keypair,
-            )?;
+            );
         }
         SECTOR_NODES_16_MIB => {
-            let circ_partition_proofs: Vec<
-                Halo2Proof<F::Affine, SdrPorepCircuit<F, U, V, W, SECTOR_NODES_16_MIB>>,
-            > = proofs_bytes.map(Into::into).collect();
-
             let circ = SdrPorepCircuit::<F, U, V, W, SECTOR_NODES_16_MIB>::blank_circuit();
 
             let keypair = <StackedDrg<
@@ -2191,18 +2135,14 @@ where
                 '_,
                 MerkleTreeWrapper<DefaultTreeHasher<F>, MockStore, U, V, W>,
                 DefaultPieceHasher<F>,
-            > as halo2::CompoundProof<F, SECTOR_NODES_16_MIB>>::verify_all_partitions(
+            > as halo2::CompoundProof<F, SECTOR_NODES_16_MIB>>::batch_verify_all_partitions(
                 &vanilla_setup_params,
                 &vanilla_pub_inputs,
-                &circ_partition_proofs,
+                &proof_bytes.to_vec().into(),
                 &keypair,
-            )?;
+            );
         }
         SECTOR_NODES_512_MIB => {
-            let circ_partition_proofs: Vec<
-                Halo2Proof<F::Affine, SdrPorepCircuit<F, U, V, W, SECTOR_NODES_512_MIB>>,
-            > = proofs_bytes.map(Into::into).collect();
-
             let circ = SdrPorepCircuit::<F, U, V, W, SECTOR_NODES_512_MIB>::blank_circuit();
 
             let keypair = <StackedDrg<
@@ -2222,18 +2162,14 @@ where
                 '_,
                 MerkleTreeWrapper<DefaultTreeHasher<F>, MockStore, U, V, W>,
                 DefaultPieceHasher<F>,
-            > as halo2::CompoundProof<F, SECTOR_NODES_512_MIB>>::verify_all_partitions(
+            > as halo2::CompoundProof<F, SECTOR_NODES_512_MIB>>::batch_verify_all_partitions(
                 &vanilla_setup_params,
                 &vanilla_pub_inputs,
-                &circ_partition_proofs,
+                &proof_bytes.to_vec().into(),
                 &keypair,
-            )?;
+            );
         }
         SECTOR_NODES_32_GIB => {
-            let circ_partition_proofs: Vec<
-                Halo2Proof<F::Affine, SdrPorepCircuit<F, U, V, W, SECTOR_NODES_32_GIB>>,
-            > = proofs_bytes.map(Into::into).collect();
-
             let circ = SdrPorepCircuit::<F, U, V, W, SECTOR_NODES_32_GIB>::blank_circuit();
 
             let keypair = <StackedDrg<
@@ -2253,18 +2189,14 @@ where
                 '_,
                 MerkleTreeWrapper<DefaultTreeHasher<F>, MockStore, U, V, W>,
                 DefaultPieceHasher<F>,
-            > as halo2::CompoundProof<F, SECTOR_NODES_32_GIB>>::verify_all_partitions(
+            > as halo2::CompoundProof<F, SECTOR_NODES_32_GIB>>::batch_verify_all_partitions(
                 &vanilla_setup_params,
                 &vanilla_pub_inputs,
-                &circ_partition_proofs,
+                &proof_bytes.to_vec().into(),
                 &keypair,
-            )?;
+            );
         }
         SECTOR_NODES_64_GIB => {
-            let circ_partition_proofs: Vec<
-                Halo2Proof<F::Affine, SdrPorepCircuit<F, U, V, W, SECTOR_NODES_64_GIB>>,
-            > = proofs_bytes.map(Into::into).collect();
-
             let circ = SdrPorepCircuit::<F, U, V, W, SECTOR_NODES_64_GIB>::blank_circuit();
 
             let keypair = <StackedDrg<
@@ -2284,12 +2216,12 @@ where
                 '_,
                 MerkleTreeWrapper<DefaultTreeHasher<F>, MockStore, U, V, W>,
                 DefaultPieceHasher<F>,
-            > as halo2::CompoundProof<F, SECTOR_NODES_64_GIB>>::verify_all_partitions(
+            > as halo2::CompoundProof<F, SECTOR_NODES_64_GIB>>::batch_verify_all_partitions(
                 &vanilla_setup_params,
                 &vanilla_pub_inputs,
-                &circ_partition_proofs,
+                &proof_bytes.to_vec().into(),
                 &keypair,
-            )?;
+            );
         }
         _ => unimplemented!(),
     };
