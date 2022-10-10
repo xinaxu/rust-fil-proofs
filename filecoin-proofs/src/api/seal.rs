@@ -32,6 +32,7 @@ use storage_proofs_core::{
 use storage_proofs_porep::stacked::{
     self, generate_replica_id,
     halo2::{
+        compound::BATCH_SIZE,
         constants::{
             SECTOR_NODES_16_KIB, SECTOR_NODES_16_MIB, SECTOR_NODES_2_KIB, SECTOR_NODES_32_GIB,
             SECTOR_NODES_32_KIB, SECTOR_NODES_4_KIB, SECTOR_NODES_512_MIB, SECTOR_NODES_64_GIB,
@@ -1979,7 +1980,6 @@ where
 {
     let sector_bytes: u64 = porep_config.sector_size.into();
     let sector_nodes = sector_bytes as usize >> 5;
-    let partition_count: usize = porep_config.partitions.into();
 
     let vanilla_setup_params = setup_params::<F>(
         porep_config.sector_size.into(),
@@ -2007,8 +2007,7 @@ where
     };
 
     let proofs_byte_len = proof_bytes.len();
-    assert_eq!(proofs_byte_len % partition_count, 0);
-    let proof_byte_len = proofs_byte_len / partition_count;
+    let proof_byte_len = proofs_byte_len / BATCH_SIZE;
     let proofs_bytes = proof_bytes.chunks(proof_byte_len).map(Vec::<u8>::from);
 
     match sector_nodes {
