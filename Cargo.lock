@@ -1787,7 +1787,7 @@ dependencies = [
 [[package]]
 name = "halo2_proofs"
 version = "0.2.0"
-source = "git+https://github.com/filecoin-project/halo2?branch=gpu#4a016362d7512cd40cc58d3e28e50ea017bd0e54"
+source = "git+https://github.com/filecoin-project/halo2?branch=gpu#074818e5b034ef46e7af39df9b797261a766f272"
 dependencies = [
  "bincode",
  "blake2b_simd",
