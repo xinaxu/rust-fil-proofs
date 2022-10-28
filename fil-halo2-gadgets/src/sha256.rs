@@ -22,7 +22,7 @@ use crate::{
 // Don't reformat code copied from `halo2_gadgets` repo.
 #[rustfmt::skip]
 #[allow(dead_code)]
-mod table16;
+pub(crate) mod table16;
 
 pub use table16::{BlockWord, Table16Chip, Table16Config};
 
