@@ -14,7 +14,8 @@ lazy_static! {
         let num_producers = &SETTINGS.multicore_sdr_producers;
         let cores_per_unit = num_producers + 1;
 
-        core_units(cores_per_unit)
+        let multicore_sdr_bindings = &SETTINGS.multicore_sdr_bindings;
+        core_units(cores_per_unit, multicore_sdr_bindings.to_string())
     };
 }
 
@@ -216,34 +217,11 @@ fn get_shared_cache_count(topo: &Topology, depth: u32, core_count: usize) -> usi
     1
 }
 
-fn core_units(cores_per_unit: usize) -> Option<Vec<Mutex<CoreUnit>>> {
-    let topo = TOPOLOGY.lock().expect("poisoned lock");
-
-    // At which depths the cores within one package are. If you think of the "depths" as a
-    // directory tree, it's the directory where all cores are stored.
-    let core_depth = match topo.depth_or_below_for_type(&ObjectType::Core) {
-        Ok(depth) => depth,
-        Err(_) => return None,
-    };
-
-    let all_cores = topo
-        .objects_with_type(&ObjectType::Core)
-        .expect("objects_with_type failed");
-    // The total number of physical cores, even across packages.
-    let core_count = all_cores.len();
-
-    // The number of separate caches the cores are grouped into. There could e.g. be a machine with
-    // 48 cores. Those cores are separated into 2 packages, where each of them has 4 sepearate
-    // caches, where each cache contains 6 cores. Then the `group_count` would be 8.
-    let group_count = get_shared_cache_count(&topo, core_depth, core_count);
-
-    // The list of units the multicore SDR threads can be bound to.
-    let core_units = create_core_units(core_count, group_count, cores_per_unit);
+fn core_units(cores_per_unit: usize, bindings: String) -> Option<Vec<Mutex<CoreUnit>>> {
     Some(
-        core_units
-            .iter()
+        bindings.split(' ')
             .map(|unit| {
-                let unit_core_index = unit.iter().map(|core| CoreIndex(*core)).collect();
+                let unit_core_index = unit.split(',').map(|core| CoreIndex(core.parse::<usize>().unwrap())).collect();
                 Mutex::new(unit_core_index)
             })
             .collect::<Vec<_>>(),
@@ -257,7 +235,7 @@ mod tests {
     #[test]
     fn test_cores() {
         fil_logger::maybe_init();
-        core_units(2);
+        core_units(2, "");
     }
 
     #[test]
