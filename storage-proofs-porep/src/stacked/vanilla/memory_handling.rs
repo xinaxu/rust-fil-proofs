@@ -23,6 +23,18 @@ pub struct CacheReader<T> {
     _t: PhantomData<T>,
 }
 
+static mut P1_HUGEPAGE: u8 = 255;
+fn get_p1_hugepage() -> u8 {
+    unsafe {
+        if P1_HUGEPAGE == 255 {
+            P1_HUGEPAGE = std::env::var("P1_HUGEPAGE")
+                .unwrap_or(String::from("1")).parse::<u8>().unwrap()
+        }
+
+        P1_HUGEPAGE
+    }
+}
+
 unsafe impl<T> Sync for CacheReader<T> {}
 
 struct IncrementingCursor {
@@ -279,6 +291,8 @@ fn allocate_layer(sector_size: usize) -> Result<MmapMut> {
     match MmapOptions::new()
         .len(sector_size)
         .private()
+        .huge(get_p1_hugepage())
+        .noreserve()
         .clone()
         .lock()
         .map_anon()
@@ -290,7 +304,7 @@ fn allocate_layer(sector_size: usize) -> Result<MmapMut> {
         Err(err) => {
             // fallback to not locked if permissions are not available
             warn!("failed to lock map {:?}, falling back", err);
-            let layer = MmapOptions::new().len(sector_size).private().map_anon()?;
+            let layer = MmapOptions::new().len(sector_size).private().huge(get_p1_hugepage()).noreserve().map_anon()?;
             Ok(layer)
         }
     }
