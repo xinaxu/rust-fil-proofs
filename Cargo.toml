@@ -12,3 +12,6 @@ members = [
   "filecoin-hashers",
   "storage-proofs-update",
 ]
+
+[patch.crates-io]
+mapr = { path = "../mapr" }
