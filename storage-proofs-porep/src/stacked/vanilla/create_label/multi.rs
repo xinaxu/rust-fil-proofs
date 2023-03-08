@@ -53,9 +53,6 @@ const SHA256_INITIAL_DIGEST: [u32; 8] = [
     0x5be0_cd19,
 ];
 
-static NUM_PC1: std::sync::atomic::AtomicU8 = std::sync::atomic::AtomicU8::new(0);
-static NUM_PC1_LAYER1: std::sync::atomic::AtomicU8 = std::sync::atomic::AtomicU8::new(0);
-
 #[inline]
 fn fill_buffer(
     cur_node: u64,
@@ -474,22 +471,7 @@ pub fn create_labels_for_encoding<Tree: 'static + MerkleTreeTrait, T: AsRef<[u8]
         &parents_cache.path,
     )?;
 
-    NUM_PC1.fetch_add(1, SeqCst);
     for (layer, layer_state) in (1..=layers).zip(layer_states.iter()) {
-        if layer == 1 {
-            NUM_PC1_LAYER1.fetch_add(1, SeqCst);
-        }
-        if layer == 2 {
-            loop {
-                if NUM_PC1.load(SeqCst) < SETTINGS.multicore_max_pc1
-                   || NUM_PC1_LAYER1.load(SeqCst) > 0 {
-                    break
-                }
-                info!("Waiting till NUM_PC1 < max_pc1 or NUM_PC1_LAYER1 > 0");
-                thread::sleep(std::time::Duration::from_secs(10));
-            }
-        }
-
         info!("Layer {}", layer);
 
         if layer_state.generated {
@@ -538,11 +520,8 @@ pub fn create_labels_for_encoding<Tree: 'static + MerkleTreeTrait, T: AsRef<[u8]
                 layer, layer_config.id
             );
         }
-        if layer == 1 {
-            NUM_PC1_LAYER1.fetch_sub(1, SeqCst);
-        }
     }
-    NUM_PC1.fetch_sub(1, SeqCst);
+
     Ok((
         Labels::<Tree> {
             labels: layer_states.iter().map(|s| s.config.clone()).collect(),

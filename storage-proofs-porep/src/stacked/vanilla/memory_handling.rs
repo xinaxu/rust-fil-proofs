@@ -288,7 +288,26 @@ impl<T: FromByteSlice> CacheReader<T> {
 }
 
 fn allocate_layer(sector_size: usize) -> Result<MmapMut> {
-    Ok(MmapOptions::new().len(sector_size).private().huge(get_p1_hugepage()).noreserve().map_anon()?)
+    match MmapOptions::new()
+        .len(sector_size)
+        .private()
+        .huge(get_p1_hugepage())
+        .noreserve()
+        .clone()
+        .lock()
+        .map_anon()
+        .and_then(|mut layer| {
+            layer.mlock()?;
+            Ok(layer)
+        }) {
+        Ok(layer) => Ok(layer),
+        Err(err) => {
+            // fallback to not locked if permissions are not available
+            warn!("failed to lock map {:?}, falling back", err);
+            let layer = MmapOptions::new().len(sector_size).private().huge(get_p1_hugepage()).noreserve().map_anon()?;
+            Ok(layer)
+        }
+    }
 }
 
 pub fn setup_create_label_memory(
